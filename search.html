@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Videos</title>
+</head>
+<body>
+    <h1>Search Videos</h1>
+    <form action="/search" method="post">
+        <input type="text" name="query" placeholder="Search videos...">
+        <input type="submit" value="Search">
+    </form>
+
+    <ul>
+        {% for folder_name, video_name in video_names %}
+            <li>
+                <h3>{{ video_name }}</h3>
+                <video width="400" controls>
+                    <source src="{{ url_for('video', folder_name=folder_name, video_name=video_name) }}" type="video/mp4">
+                </video>
+            </li>
+        {% endfor %}
+    </ul>
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Folders</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Select a folder to view videos:</h1>
+    <ul>
+        {% for folder in folder_names %}
+            <li><a href="{{ url_for('show_videos', folder_name=folder) }}">{{ folder }}</a></li>
+        {% endfor %}
+    </ul>
+    <a href="/search">Search Videos</a>
+</body>
+</html>

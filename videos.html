@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Videos in {{ folder_name }}</title>
+</head>
+<body>
+    <h1>Videos in {{ folder_name }}</h1>
+    <ul>
+        {% for video in video_names %}
+            <li>
+                <h3>{{ video }}</h3>
+                    <div class="video-container" data-video-name="{{ video }}" data-folder-name="{{ folder_name }}" onclick="loadVideo(this)">
+                    <!-- Placeholder button -->
+                        <button>Load {{ video }}</button>
+                </div>
+    
+            </li>
+        {% endfor %}
+    </ul>
+    <script>
+            function loadVideo(element) {
+                var videoName = element.getAttribute('data-video-name');
+                var folderName = element.getAttribute('data-folder-name');
+                var videoSrc = "/video/" + folderName + '/' + videoName;
+
+                // Check for an existing video element
+                var existingVideoElement = element.querySelector('video');
+                
+                if (existingVideoElement) {
+                    // Update the source of the existing video element
+                    existingVideoElement.querySelector('source').src = videoSrc;
+                    //existingVideoElement.load();  // Required to refresh the video element with the new source
+                } else {
+                    // Create a new video element
+                    var videoElement = document.createElement('video');
+                    videoElement.setAttribute('width', '400');
+                    videoElement.setAttribute('controls', '');
+
+                    var sourceElement = document.createElement('source');
+                    sourceElement.setAttribute('src', videoSrc);
+                    sourceElement.setAttribute('type', 'video/mp4');
+
+                    videoElement.appendChild(sourceElement);
+                    element.appendChild(videoElement);
+                }
+
+                // Remove the button
+                var button = element.querySelector('button');
+                if (button) {
+                    element.removeChild(button);
+                }
+        }
+
+
+    </script>
+</body>
+</html>
